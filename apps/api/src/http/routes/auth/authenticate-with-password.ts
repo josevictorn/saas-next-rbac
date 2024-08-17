@@ -40,14 +40,14 @@ export async function authenticateWithPassword(app: FastifyInstance) {
       }
 
       if (userFromEmail.passwordHash === null) {
-        return reply
-          .status(400)
-          .send({ message: 'User does not have a password, use social login.' })
+        return reply.status(400).send({
+          message: 'User does not have a password, use social login.',
+        })
       }
 
       const isPasswordValid = await compare(
         password,
-        userFromEmail.passwordHash
+        userFromEmail.passwordHash,
       )
 
       if (!isPasswordValid) {
@@ -62,10 +62,10 @@ export async function authenticateWithPassword(app: FastifyInstance) {
           sign: {
             expiresIn: '7d',
           },
-        }
+        },
       )
 
       return reply.status(201).send({ token })
-    }
+    },
   )
 }
