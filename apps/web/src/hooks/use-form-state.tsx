@@ -27,7 +27,7 @@ export function useFormState(
       const state = await action(data)
 
       if (state.success && onSuccess) {
-        await onSuccess
+        await onSuccess()
       }
       setFormState(state)
     })
