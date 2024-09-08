@@ -1,11 +1,7 @@
-import Link from 'next/link'
+import { auth } from '@/auth/auth'
 
-import { Button } from '@/components/ui/button'
+export default async function Home() {
+  const { user } = await auth()
 
-export default function Home() {
-  return (
-    <Button>
-      <Link href="/auth/sign-in">Sign In</Link>
-    </Button>
-  )
+  return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
